@@ -1,15 +1,16 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
+
+#if 0 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
 	namespace ft = std;
 #else
-	#include <map.hpp>
-	#include <stack.hpp>
-	#include <vector.hpp>
+	#include "map.hpp"
+	#include "stack.hpp"
+	#include "vector.hpp"
 #endif
 
 #include <stdlib.h>
@@ -52,6 +53,7 @@ int main(int argc, char** argv) {
 		std::cerr << "Count value:" << COUNT << std::endl;
 		return 1;
 	}
+	std::cout << "Count value:" << COUNT << std::endl;
 	const int seed = atoi(argv[1]);
 	srand(seed);
 
@@ -64,13 +66,15 @@ int main(int argc, char** argv) {
 
 	for (int i = 0; i < COUNT; i++)
 	{
-		vector_buffer.push_back(Buffer());
+		vector_buffer.push_back( Buffer() );
 	}
+	std::cout << "vetor_buffer size=" << vector_buffer.size() << std::endl; //debug
 
 	for (int i = 0; i < COUNT; i++)
 	{
 		const int idx = rand() % COUNT;
-		vector_buffer[idx].idx = 5;
+		vector_buffer[idx].idx = 5; //buff is empty
+		//std::cout << idx << std::endl;
 	}
 	ft::vector<Buffer>().swap(vector_buffer);
 
@@ -85,7 +89,7 @@ int main(int argc, char** argv) {
 	}
 	catch(const std::exception& e)
 	{
-		//NORMAL ! :P
+		std::cout << "NORMAL ! :P" << std::endl;
 	}
 	
 	for (int i = 0; i < COUNT; ++i)
@@ -94,10 +98,12 @@ int main(int argc, char** argv) {
 	}
 
 	int sum = 0;
-	for (int i = 0; i < 10000; i++)
+	for (int i = 100000; i < 1000000; i++)
 	{
-		int access = rand();
+	//	int access = rand();
+		int access = i;
 		sum += map_int[access];
+	//	std::cout << access << " : " << map_int[access] << std::endl;
 	}
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
